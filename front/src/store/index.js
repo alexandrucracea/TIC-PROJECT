@@ -74,6 +74,12 @@ export default createStore({
       );
       commit("setArticles", articles.data);
     },
+    async loadArticle(_, id) {
+      const articles = await axios.get(
+        `${process.env.VUE_APP_API_URL}/articles/${id}`
+      );
+      return articles?.data || {};
+    },
   },
   modules: {},
 });
