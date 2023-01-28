@@ -6,9 +6,7 @@
     <button>
       <router-link to="/about">About</router-link>
     </button>
-    <button v-if="isAuthenticated">
-      <logout-button></logout-button>
-    </button>
+    <logout-button v-if="isAuthenticated" @logout="logout"></logout-button>
     <button v-else>
       <router-link to="/login">Login</router-link>
     </button>
@@ -18,12 +16,28 @@
 import LogoutButton from "./LogoutButton.vue";
 
 export default {
+  name: "TheHeader",
+  data() {
+    return {
+      isLoggenIn: false,
+    };
+  },
   components: {
     LogoutButton,
   },
   computed: {
     isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
+      return this.isLoggenIn || this.$store.getters.token !== null;
+    },
+  },
+  created() {
+    this.isLoggenIn = this.$store.getters.isAuthenticated;
+  },
+  methods: {
+    logout() {
+      this.isLoggenIn = false;
+      this.$store.dispatch("logout");
+      this.$store.replace("/login");
     },
   },
 };

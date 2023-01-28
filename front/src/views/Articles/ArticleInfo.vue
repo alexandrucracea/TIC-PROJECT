@@ -1,21 +1,28 @@
 <template>
   <div>
-    <h1>Article General Information</h1>
     <div>
-      <h2>{{ name }}</h2>
-      <p>{{ period }}</p>
-      <p>{{ date }}</p>
-      <p>{{ condition }}</p>
-      <ul>
-        <li v-for="color in colors" :key="color">{{ color }}</li>
-      </ul>
-      <p>{{ description }}</p>
-      <p>{{ price }}</p>
+      <h1>Article General Information</h1>
+      <div>
+        <h2>{{ name }}</h2>
+        <p>{{ period }}</p>
+        <p>{{ date }}</p>
+        <p>{{ condition }}</p>
+        <ul>
+          <li v-for="color in colors" :key="color">{{ color }}</li>
+        </ul>
+        <p>{{ description }}</p>
+        <p>{{ price }}</p>
+      </div>
+    </div>
+    <div>
+      <button @click="handleEdit">Edit</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "ArticleGeneralInfo",
   props: {
@@ -57,7 +64,13 @@ export default {
   },
   methods: {
     async getArticle() {
-      this.article = await this.$store.dispatch("loadArticle", this.id);
+      const article = await axios.get(
+        `${process.env.VUE_APP_API_URL}/articles/${this.id}`
+      );
+      this.article = article?.data || {};
+    },
+    handleEdit() {
+      this.$router.push("/articles/" + this.id + "/edit");
     },
   },
 };

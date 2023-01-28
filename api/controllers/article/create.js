@@ -12,10 +12,10 @@ module.exports = async (req, res) => {
   const articlesRef = db.collection('articles'); //colectiile din firestore sunt mereu la plural -> conventie
   const snapshot = await articlesRef //verificam daca in colectia noastra mai exista ceva cu aceleasi valori
     .where('name', '==', name)
-    .where('price','==',parseFloat(price)) 
-    .where('year','==',Number(year)) //constructor de Int
+    .where('price', '==', parseFloat(price))
+    .where('year', '==', Number(year)) //constructor de Int
     .where('identity.id', '==', me)
-    .where('available','==',true)
+    .where('available', '==', true)
     .get();
   if (snapshot.size) {
     throw error(409, 'An identical article already exists');
@@ -34,8 +34,8 @@ module.exports = async (req, res) => {
       //aici am stocat despre cine are dreptul sa creeze
     },
     name: name.trim(),
-    price: parseFloat(price.trim()),
-    year: Number(year.trim())
+    price: Number.isInteger(price) ? price : parseFloat(price.trim()),
+    year: Number.isInteger(year) ? year : Number(year.trim()),
   };
 
   const response = await articlesRef.add(payload);

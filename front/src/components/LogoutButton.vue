@@ -4,10 +4,11 @@
 
 <script>
 export default {
+  name: "LogoutButton",
+  emits: ["logout"], //ii spune componentei ca primeste o functie de la parinte pe care poate sa o execute
   methods: {
     logout() {
-      this.$store.dispatch("logout");
-      this.$router.replace("/login");
+      this.$emit("logout");
     },
   },
 };

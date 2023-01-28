@@ -21,10 +21,16 @@ export default createStore({
       return state.userId;
     },
     isAuthenticated(state) {
-      return state.token !== null;
+      return state.token !== null || localStorage.getItem("token") !== null;
     },
     getArticles(state) {
       return state.articles;
+    },
+    isAdmin(state) {
+      return (
+        state.email === "alexandru.cracea29@email.com" ||
+        localStorage.getItem("email") === "alexandru.cracea29@email.com"
+      );
     },
   },
   mutations: {
@@ -74,11 +80,19 @@ export default createStore({
       );
       commit("setArticles", articles.data);
     },
-    async loadArticle(_, id) {
-      const articles = await axios.get(
-        `${process.env.VUE_APP_API_URL}/articles/${id}`
+    async deleteArticle({ commit }, id) {
+      await axios.delete(
+        `${process.env.VUE_APP_API_URL}/admin/articles/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
-      return articles?.data || {};
+      const articles = await axios.get(
+        `${process.env.VUE_APP_API_URL}/articles`
+      );
+      commit("setArticles", articles.data);
     },
   },
   modules: {},
