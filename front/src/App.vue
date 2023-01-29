@@ -17,6 +17,9 @@ export default {};
   text-align: center;
   color: #2c3e50;
 }
+body {
+  background-color: #eaeaea;
+}
 
 nav {
   padding: 30px;

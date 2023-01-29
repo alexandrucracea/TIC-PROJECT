@@ -6,6 +6,12 @@
     <button>
       <router-link to="/about">About</router-link>
     </button>
+    <button v-if="isAuthenticated">
+      <router-link to="/auctions">All auctions</router-link>
+    </button>
+    <button v-if="isAuthenticated">
+      <router-link to="/articles">All articles</router-link>
+    </button>
     <logout-button v-if="isAuthenticated" @logout="logout"></logout-button>
     <button v-else>
       <router-link to="/login">Login</router-link>
@@ -37,7 +43,7 @@ export default {
     logout() {
       this.isLoggenIn = false;
       this.$store.dispatch("logout");
-      this.$store.replace("/login");
+      this.$router.replace("/login");
     },
   },
 };

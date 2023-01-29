@@ -9,6 +9,7 @@ export default createStore({
     token: null,
     userId: null,
     articles: [],
+    auctions: [],
   },
   getters: {
     email(state) {
@@ -26,6 +27,9 @@ export default createStore({
     getArticles(state) {
       return state.articles;
     },
+    getAuctions(state) {
+      return state.auctions;
+    },
     isAdmin(state) {
       return (
         state.email === "alexandru.cracea29@email.com" ||
@@ -41,6 +45,9 @@ export default createStore({
     },
     setArticles(state, payload) {
       state.articles = payload;
+    },
+    setAuctions(state, payload) {
+      state.auctions = payload;
     },
   },
   actions: {
@@ -79,6 +86,12 @@ export default createStore({
         `${process.env.VUE_APP_API_URL}/articles`
       );
       commit("setArticles", articles.data);
+    },
+    async loadAllAuctions({ commit }) {
+      const auctions = await axios.get(
+        `${process.env.VUE_APP_API_URL}/auctions`
+      );
+      commit("setAuctions", auctions.data);
     },
     async deleteArticle({ commit }, id) {
       await axios.delete(

@@ -4,12 +4,22 @@ import LoginView from "../views/LoginView.vue";
 import ArticleInfo from "../views/Articles/ArticleInfo.vue";
 import ArticleEdit from "../views/Articles/ArticleEdit.vue";
 import AddArticleView from "../views/Articles/AddArticleView.vue";
+import AllAuctionsView from "../views/Auctions/AllAuctionsView";
+import AllArticlesView from "../views/Articles/AllArticlesView";
+import AuctionInfo from "../views/Auctions/AuctionInfo";
+import AuctionEditView from "../views/Auctions/AuctionEditView";
 
 const routes = [
   {
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  // ARTICLES
+  {
+    path: "/articles",
+    name: "load-all-articles",
+    component: AllArticlesView,
   },
   {
     path: "/articles/:id",
@@ -37,6 +47,24 @@ const routes = [
     path: "/add-article",
     name: "add-article",
     component: AddArticleView,
+  },
+  {
+    path: "/auctions",
+    name: "load-all-auctions",
+    component: AllAuctionsView,
+  },
+  // AUCTIONS
+  {
+    path: "/auctions/:id",
+    name: "auction-info",
+    component: AuctionInfo,
+    props: true,
+  },
+  {
+    path: "/auctions/:id/edit",
+    name: "auction-edit",
+    component: AuctionEditView,
+    props: true,
   },
 ];
 

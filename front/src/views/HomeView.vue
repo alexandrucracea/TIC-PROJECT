@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <!-- <main>
     <p v-if="error !== null">{{ error }}</p>
     <h1>Articles</h1>
     <div>
@@ -21,42 +21,43 @@
         </li>
       </ul>
     </div>
-  </main>
+  </main> -->
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "HomeView",
-  data() {
-    return {
-      error: null,
-    };
-  },
-  created() {
-    this.error = null;
-    this.loadArticles();
-  },
-  computed: {
-    articles() {
-      console.log(this.$store.getters.getArticles);
-      return this.$store.getters.getArticles;
-    },
-    isAdmin() {
-      return this.$store.getters.isAdmin;
-    },
-  },
-  methods: {
-    async loadArticles() {
-      await this.$store.dispatch("loadArticles");
-    },
-    async handleDelete(articleId) {
-      this.error = null;
-      try {
-        await this.$store.dispatch("deleteArticle", articleId);
-      } catch (error) {
-        this.error = error.message;
-      }
-    },
-  },
+  // name: "HomeView",
+  // data() {
+  //   return {
+  //     error: null,
+  //   };
+  // },
+  // created() {
+  //   this.error = null;
+  //   this.loadArticles();
+  // },
+  // computed: {
+  //   articles() {
+  //     console.log(this.$store.getters.getArticles);
+  //     return this.$store.getters.getArticles;
+  //   },
+  //   isAdmin() {
+  //     return this.$store.getters.isAdmin;
+  //   },
+  // },
+  // methods: {
+  //   async loadArticles() {
+  //     await this.$store.dispatch("loadArticles");
+  //   },
+  //   async handleDelete(articleId) {
+  //     this.error = null;
+  //     try {
+  //       await this.$store.dispatch("deleteArticle", articleId);
+  //     } catch (error) {
+  //       this.error = error.message;
+  //     }
+  //   },
+  // },
 };
 </script>
