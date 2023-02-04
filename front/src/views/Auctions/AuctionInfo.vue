@@ -63,7 +63,7 @@ export default {
       this.auction = auction?.data || {};
     },
     handleEdit() {
-      this.$router.push("/auctions/" + this.id + "/edit");
+      this.$router.push("/edit-auction/" + this.id);
     },
   },
 };

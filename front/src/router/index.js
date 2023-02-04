@@ -7,9 +7,10 @@ import AddArticleView from "../views/Articles/AddArticleView.vue";
 import AllAuctionsView from "../views/Auctions/AllAuctionsView.vue";
 import AllArticlesView from "../views/Articles/AllArticlesView.vue";
 import AuctionInfo from "../views/Auctions/AuctionInfo.vue";
-import AuctionEditView from "../views/Auctions/AuctionEditView.vue";
+// import AuctionEditView from "../views/Auctions/AuctionEditView.vue";
 import AddAuctionView from "../views/Auctions/AddAuctionDetailsView.vue";
 import AddAuctionArticlesView from "../views/Auctions/AddAuctionArticlesView.vue";
+import EditAuctionArticlesView from "../views/Auctions/EditAuctionArticlesView.vue";
 
 const routes = [
   {
@@ -62,12 +63,12 @@ const routes = [
     component: AuctionInfo,
     props: true,
   },
-  {
-    path: "/auctions/:id/edit",
-    name: "auction-edit",
-    component: AuctionEditView,
-    props: true,
-  },
+  // {
+  //   path: "/auctions/:id/edit",
+  //   name: "auction-edit",
+  //   component: AuctionEditView,
+  //   props: true,
+  // },
   {
     path: "/add-auction",
     name: "add-auction-articles",
@@ -78,6 +79,12 @@ const routes = [
     path: "/add-auction",
     name: "add-auction",
     component: AddAuctionView,
+    props: true,
+  },
+  {
+    path: "/edit-auction/:id",
+    name: "edit-auction",
+    component: EditAuctionArticlesView,
     props: true,
   },
 ];

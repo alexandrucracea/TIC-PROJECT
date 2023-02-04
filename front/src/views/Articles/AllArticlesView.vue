@@ -39,7 +39,6 @@ export default {
   },
   computed: {
     articles() {
-      console.log(this.$store.getters.getArticles);
       return this.$store.getters.getArticles;
     },
     isAdmin() {

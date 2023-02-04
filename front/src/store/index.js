@@ -10,6 +10,7 @@ export default createStore({
     userId: null,
     articles: [],
     auctions: [],
+    auctionArticles: [],
   },
   getters: {
     email(state) {

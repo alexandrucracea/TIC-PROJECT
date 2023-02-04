@@ -33,6 +33,7 @@
 <script>
 import AddAuctionView from "./AddAuctionDetailsView.vue";
 export default {
+  //TODO de schimbat available in false atunci cand il adaugam
   name: "AddArticlesToAuctionView",
   data() {
     return {
@@ -62,7 +63,6 @@ export default {
     },
     handleAddArticlesToAuction() {
       this.loadedArticles = this.articles;
-      console.log(this.loadArticles);
       this.areArticlesAdded = true;
     },
   },
