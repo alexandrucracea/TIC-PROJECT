@@ -107,6 +107,20 @@ export default createStore({
       );
       commit("setArticles", articles.data);
     },
+    async deleteAuction({ commit }, id) {
+      await axios.delete(
+        `${process.env.VUE_APP_API_URL}/admin/auctions/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const auctions = await axios.get(
+        `${process.env.VUE_APP_API_URL}/auctions`
+      );
+      commit("setAuctions", auctions.data);
+    },
   },
   modules: {},
 });

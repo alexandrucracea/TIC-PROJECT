@@ -8,7 +8,8 @@ import AllAuctionsView from "../views/Auctions/AllAuctionsView.vue";
 import AllArticlesView from "../views/Articles/AllArticlesView.vue";
 import AuctionInfo from "../views/Auctions/AuctionInfo.vue";
 import AuctionEditView from "../views/Auctions/AuctionEditView.vue";
-import AddAuctionView from "../views/Auctions/AddAuctionView.vue";
+import AddAuctionView from "../views/Auctions/AddAuctionDetailsView.vue";
+import AddAuctionArticlesView from "../views/Auctions/AddAuctionArticlesView.vue";
 
 const routes = [
   {
@@ -65,6 +66,12 @@ const routes = [
     path: "/auctions/:id/edit",
     name: "auction-edit",
     component: AuctionEditView,
+    props: true,
+  },
+  {
+    path: "/add-auction",
+    name: "add-auction-articles",
+    component: AddAuctionArticlesView,
     props: true,
   },
   {

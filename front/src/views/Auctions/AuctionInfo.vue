@@ -11,6 +11,9 @@
     <p>{{ startDate }}</p>
     <!-- TODO de convertit acest tip de data -->
     <p>{{ endDate }}</p>
+    <div>
+      <button @click="handleEdit">Edit</button>
+    </div>
   </div>
 </template>
 
@@ -58,6 +61,9 @@ export default {
         `${process.env.VUE_APP_API_URL}/auctions/${this.id}`
       );
       this.auction = auction?.data || {};
+    },
+    handleEdit() {
+      this.$router.push("/auctions/" + this.id + "/edit");
     },
   },
 };

@@ -10,6 +10,9 @@
       <router-link :to="'/auctions/' + auction.id">
         {{ auction.name }}
       </router-link>
+      <div v-if="isAdmin">
+        <button @click="handleDelete(auction.id)">Delete</button>
+      </div>
     </li>
   </ul>
 </template>
@@ -38,6 +41,14 @@ export default {
   methods: {
     async loadAllAuctions() {
       await this.$store.dispatch("loadAllAuctions");
+    },
+    async handleDelete(auctionId) {
+      this.error = null;
+      try {
+        await this.$store.dispatch("deleteAuction", auctionId);
+      } catch (error) {
+        this.error = error.message;
+      }
     },
   },
 };

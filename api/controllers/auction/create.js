@@ -19,18 +19,18 @@ module.exports = async (req, res) => {
     .where('identity.id', '==', me)
     .get();
   if (snapshot.size) {
-    // throw error(409, 'An identical article already exists');
-    const articlesReceived = articles.filter((a) => a.availabe === false);
+    throw error(409, 'An identical article already exists');
+  }
+  if (!snapshot.size) {
+    const articlesReceived = articles.filter(article => article.available === false);
     if (articlesReceived.length > 0) {
       throw error(400, 'Selected articles are not available');
     }
-
     const identitiesRef = db.collection('identities');
     const doc = await identitiesRef.doc(me).get();
     if (!doc.exists) {
       throw error(404, 'Resource not found');
     }
-
     const payload = {
       identity: {
         ...pick(doc.data(), ['email', 'name']), //spread operator
@@ -44,7 +44,6 @@ module.exports = async (req, res) => {
       articles: articles,
       status: status.trim(),
     };
-
     const response = await auctionsRef.add(payload);
     if (!response.id) {
       throw error(500, 'Failed to create auction');
@@ -52,6 +51,6 @@ module.exports = async (req, res) => {
     const data = (await response.get()).data();
     data.id = response.id;
 
-    return res.status(200).json({ data, message: 'Article created' });
+    return res.status(200).json({  message: 'Auction created' });
   }
 };
