@@ -65,9 +65,9 @@
             </div>
           </div>
         </div>
+        <button type="submit" class="button">Save</button>
       </form>
     </div>
-    <button type="submit" class="button">Save</button>
   </div>
 </template>
 
@@ -82,11 +82,18 @@ export default {
       required: true,
     },
   },
+  //TODO aici de rezolvat probleme pentru available si de adaugat campul pe year
   data() {
     return {
       name: "test",
       description: "test",
       colors: [],
+      price: "",
+      period: "",
+      condition: "",
+      date: "",
+      available: "",
+      year: "",
       errors: {
         name: " ",
         description: " ",
@@ -98,7 +105,6 @@ export default {
         available: " ",
       },
     };
-    //todo de adaugat si celelalte campuri
   },
   created() {
     this.getArticle();
@@ -181,10 +187,10 @@ export default {
         this.errors.colors = "The colors of the article is required";
         valid = false;
       }
-      if (this.price.trim().length === 0) {
-        this.errors.price = "Price of the article is required";
-        valid = false;
-      }
+      // if (this.price.trim().length === 0) {
+      //   this.errors.price = "Price of the article is required";
+      //   valid = false;
+      // }
       if (this.condition.trim().length === 0) {
         this.errors.condition = "Condition of the article is required";
         valid = false;

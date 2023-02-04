@@ -1,5 +1,10 @@
 <template>
+  <the-header></the-header>
   <h1>Auctions</h1>
+  <router-link :to="'/add-auction'">
+    <button>Add auctions</button>
+  </router-link>
+
   <ul>
     <li v-for="auction in auctions" :key="auction.id">
       <router-link :to="'/auctions/' + auction.id">

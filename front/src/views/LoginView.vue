@@ -1,16 +1,23 @@
 <template>
-  <div>
-    <h1>Login form</h1>
-    <div class="flexContainer">
-      <form @submit.prevent="login" class="flex-container">
-        <label for="email">Email</label>
-        <input type="email" id="email" v-model.trim="email" />
-        <span v-if="emailError" class="error">{{ emailError }}</span>
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model.trim="password" />
-        <span v-if="passwordError" class="error">{{ passwordError }}</span>
-        <button type="submit">Login</button>
-        <span v-if="loginError" class="error">{{ loginError }}</span>
+  <img src="../../pictures/login-background.jpg" class="background" />
+  <div class="body">
+    <div class="login-form">
+      <h1>Welcome</h1>
+      <form @submit.prevent="login" class="form">
+        <div class="login-input email-input">
+          <label for="email">Email</label>
+          <input type="email" id="email" v-model.trim="email" />
+        </div>
+        <div class="login-input password-input">
+          <span v-if="emailError" class="error">{{ emailError }}</span>
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model.trim="password" />
+          <span v-if="passwordError" class="error">{{ passwordError }}</span>
+        </div>
+        <div class="action">
+          <button type="submit">Login</button>
+          <span v-if="loginError" class="error">{{ loginError }}</span>
+        </div>
       </form>
     </div>
   </div>
@@ -91,22 +98,42 @@ export default {
 </script>
 
 <style scoped>
+.background {
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+.body {
+  width: 100vw;
+  height: 92vh;
+  display: flex;
+  align-items: center;
+  /* background-image: url("../../pictures/login-background.jpg");
+  background-size: cover; */
+}
 .error {
   color: red;
 }
 button {
   padding: 0.8em 1.8em;
-  border: 2px solid #616283;
+  border: 2px solid #2c3e50;
   position: relative;
   overflow: hidden;
-  background-color: transparent;
   text-align: center;
   text-transform: uppercase;
   font-size: 16px;
   transition: 0.3s;
   z-index: 1;
   font-family: inherit;
-  color: #616283;
+  color: #2c3e50;
+  margin-top: 2rem;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.714);
+  cursor: pointer;
 }
 
 button::before {
@@ -117,7 +144,7 @@ button::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  background: #616283;
+  background: #2c3e50;
   transition: 0.5s ease;
   display: block;
   z-index: -1;
@@ -130,14 +157,52 @@ button:hover::before {
 button:hover {
   color: #efeff0;
 }
-.flex-container {
+h1 {
+  padding: 3rem;
+}
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  height: 30rem;
+  width: 80%;
   /* background-color: red; */
-  margin: auto;
-  width: 50%;
+}
+.login-form {
+  background: #eaeaea95;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-direction: column;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vh;
+  /* background-color: blue; */
+}
+.login-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+h1 {
+  color: #2c3e50;
+}
+input {
+  height: 2rem;
+  width: 20rem;
+  border: none;
+  opacity: 0.7;
+}
+label {
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  /* color: var(--accent-color); */
+  color: #2c3e50;
+  font-weight: bold;
 }
 </style>

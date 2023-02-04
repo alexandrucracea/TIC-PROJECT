@@ -12,6 +12,7 @@
         </ul>
         <p>{{ description }}</p>
         <p>{{ price }}</p>
+        <p>{{ year }}</p>
       </div>
     </div>
     <div>
@@ -60,6 +61,9 @@ export default {
     },
     colors() {
       return this.article?.colors || [];
+    },
+    year() {
+      return this.article?.year || "";
     },
   },
   methods: {

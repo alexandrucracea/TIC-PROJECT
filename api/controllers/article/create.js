@@ -7,7 +7,17 @@ module.exports = async (req, res) => {
     throw error(404, 'Missing required params');
   }
 
-  const { name, price, year } = req.body; //destructurare
+  const {
+    name,
+    year,
+    description,
+    period,
+    condition,
+    date,
+    price,
+    available,
+    colors,
+  } = req.body; //destructurare
   const db = initializeFirestore();
   const articlesRef = db.collection('articles'); //colectiile din firestore sunt mereu la plural -> conventie
   const snapshot = await articlesRef //verificam daca in colectia noastra mai exista ceva cu aceleasi valori
@@ -34,8 +44,14 @@ module.exports = async (req, res) => {
       //aici am stocat despre cine are dreptul sa creeze
     },
     name: name.trim(),
-    price: Number.isInteger(price) ? price : parseFloat(price.trim()),
     year: Number.isInteger(year) ? year : Number(year.trim()),
+    description: description.trim(),
+    period: period.trim(),
+    condition: condition.trim(),
+    date: date,
+    price: Number.isInteger(price) ? price : parseFloat(price.trim()),
+    available: available ? true : false,
+    colors: colors,
   };
 
   const response = await articlesRef.add(payload);

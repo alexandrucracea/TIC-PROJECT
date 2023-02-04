@@ -1,4 +1,4 @@
-const { initializeFirestore } = require("../../functions");
+const { initializeFirestore } = require('../../functions');
 
 module.exports = async (req, res) => {
   const { id } = req.params;
@@ -17,37 +17,51 @@ module.exports = async (req, res) => {
   // if (doc.data().identity.id !== me) {
   //   throw error(400, 'Not allowed to update article');
   // }
-  
-//TODO -> de adaugat  acea verificare pentru if !me sa punem un mesaj <-> DOAR ADMINII FAC MODIFICARI
+
+  //TODO -> de adaugat  acea verificare pentru if !me sa punem un mesaj <-> DOAR ADMINII FAC MODIFICARI
 
   const payload = {};
-  const { description,name,available,date,colors,period,condition,price,identity} = req.body;
-  if(description){
+  const {
+    description,
+    name,
+    available,
+    date,
+    colors,
+    period,
+    condition,
+    price,
+    identity,
+    year,
+  } = req.body;
+  if (description) {
     payload.description = description;
   }
   if (name) {
     payload.name = name;
   }
   // if(available){
-    payload.available = available;
+  payload.available = available;
   // }
-  if(date){
+  if (date) {
     payload.date = date;
   }
-  if(colors){
+  if (colors) {
     payload.colors = colors;
   }
-  if(period){
+  if (period) {
     payload.period = period;
   }
-  if(condition){
+  if (condition) {
     payload.condition = condition;
   }
-  if(price){
+  if (price) {
     payload.price = price;
   }
   if (identity) {
     payload.identity = identity;
+  }
+  if (year) {
+    payload.year = year;
   }
 
   await articlesRef.update(payload);

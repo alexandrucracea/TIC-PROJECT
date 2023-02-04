@@ -1,5 +1,5 @@
 <template>
-  <the-header></the-header>
+  <!-- <the-header></the-header> -->
   <router-view />
 </template>
 
@@ -8,17 +8,29 @@ export default {};
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@300;400;500;600;700&display=swap");
 
 #app {
   font-family: Oswald;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  /* color: #2c3e50; */
+  /* background-image: url("../pictures/login-background.jpg");
+  background-size: cover;
+  background-repeat: initial;
+  background-size: 100vh; */
+  /* height: 100%;
+  width: 100%; */
+}
+* {
+  margin: 0;
+  --accent-color: #374a67;
+  font-family: Bitter;
 }
 body {
   background-color: #eaeaea;
+  height: 100%;
 }
 
 nav {

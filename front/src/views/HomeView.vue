@@ -1,4 +1,5 @@
 <template>
+  <the-header></the-header>
   <!-- <main>
     <p v-if="error !== null">{{ error }}</p>
     <h1>Articles</h1>
