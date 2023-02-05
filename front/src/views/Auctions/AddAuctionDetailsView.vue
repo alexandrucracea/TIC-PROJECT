@@ -36,6 +36,7 @@
 </template>
 <script>
 import axios from "axios";
+
 export default {
   name: "AddAuctionDetailsView",
   props: {
@@ -50,7 +51,7 @@ export default {
       endDate: "",
       description: "",
       status: "",
-      articles: this.loadedArticles,
+      articles: [],
       name: "",
       errors: {
         startDate: "",
@@ -60,6 +61,9 @@ export default {
         name: "",
       },
     };
+  },
+  created() {
+    this.articles = this.loadedArticles;
   },
   methods: {
     async submitForm() {
@@ -76,6 +80,16 @@ export default {
         name: this.name,
         articles: this.articles,
       };
+      // console.log(this.articles[0].available);
+      // console.log(this.articles[0].currentTarget.dataset.target);
+      // for (const article in auction.articles) {
+      //   article["available"] = false;
+      //   console.log(article.available);
+      //   await axios.put(
+      //     `${process.env.VUE_APP_API_URL}/admin/articles/${article.id}`,
+      //     article
+      //   );
+      // }
       await axios.post(
         `${process.env.VUE_APP_API_URL}/admin/auctions`,
         auction,
@@ -85,6 +99,18 @@ export default {
           },
         }
       );
+      for (let i = 0; i < this.articles.length; i++) {
+        this.articles[i].available = false;
+        await axios.put(
+          `${process.env.VUE_APP_API_URL}/admin/articles/${this.articles[i].id}`,
+          this.articles[i],
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+      } //TODO de adaugat asta si in update
       this.$router.push(`/`);
     },
     reseError() {
