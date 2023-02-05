@@ -122,6 +122,24 @@ export default createStore({
       );
       commit("setAuctions", auctions.data);
     },
+    async updateArticleAvailability({ commit }, articlesUpdated) {
+      for (let i = 0; i < articlesUpdated.length; i++) {
+        articlesUpdated[i].available = false;
+        await axios.put(
+          `${process.env.VUE_APP_API_URL}/admin/articles/${articlesUpdated[i].id}`,
+          articlesUpdated[i],
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+      }
+      const articles = await axios.get(
+        `${process.env.VUE_APP_API_URL}/articles`
+      );
+      commit("setArticles", articles.data);
+    },
   },
   modules: {},
 });

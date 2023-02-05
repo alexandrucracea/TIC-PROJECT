@@ -1,13 +1,15 @@
 <template>
   <div>
     <button @click="handleEditAuctionArticles">
-      Modificati componenta articolelor existente in licitatiei
+      Scoateti articole din licitatie
       <!-- TODO de intrebat Mihai cum fac aici cu selected checkbox -->
     </button>
     <button @click="handleEditAddAuctionArticles">
       Adaugati articole in licitatie
     </button>
-    <button>Editati detaliile licitatiei</button>
+    <button @click="handleEditAuctionDetails">
+      Editati detaliile licitatiei
+    </button>
     <div v-if="this.isEditingAuctionArticles">
       <h1>Choose articles</h1>
       <div>
@@ -16,7 +18,7 @@
             <input
               type="checkbox"
               name="auction-item"
-              v-model="this.selectedArticles"
+              v-model="this.loadedArticles"
               :value="article"
             />
             <label for="aution-item">
@@ -54,10 +56,18 @@
         </div>
       </div>
     </div>
+    <div v-if="this.isEditingAuctionDetails">
+      <EditAuctionDetailsView
+        :loadedArticles="this.loadedArticles"
+        :id="this.id"
+      ></EditAuctionDetailsView>
+    </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import EditAuctionDetailsView from "./EditAuctionDetailsView.vue";
+
 export default {
   name: "EditArticlesOfAuctionView",
   props: {
@@ -77,7 +87,7 @@ export default {
       selected: true,
       selectedArticles: [],
       selectedNewArticles: [],
-      // isEditingAuctionDetails: null,
+      isEditingAuctionDetails: null,
     };
   },
   created() {
@@ -86,6 +96,7 @@ export default {
     this.loadArticles();
     this.isEditingAuctionArticles = false;
     this.isAddingAuctionArticles = false;
+    this.isEditingAuctionDetails = false;
   },
   computed: {
     articles() {
@@ -123,9 +134,14 @@ export default {
       this.isAddingAuctionArticles = true;
       this.allArticles = this.availableArticles;
     },
+    handleEditAuctionDetails() {
+      this.loadedArticles = this.articles;
+      this.isEditingAuctionDetails = true;
+    },
     async saveUpdatedAuctionArticles() {
       const auction = this.auction;
       auction.articles = this.selectedArticles;
+      //ar trebui sa adaug si ce deselectez aici pe true?
       await axios.put(
         `${process.env.VUE_APP_API_URL}/admin/auctions/${this.id}`,
         auction,
@@ -149,10 +165,20 @@ export default {
           },
         }
       );
+      try {
+        await this.$store.dispatch(
+          "updateArticleAvailability",
+          auction.articles,
+          false
+        );
+      } catch (error) {
+        this.error = error.message;
+      }
       // TODO -> cand adaugam articole sa setam available pe false si daca le scoatem din licitatie sa fie pe true
       this.$router.push(`/`);
     },
   },
+  components: { EditAuctionDetailsView },
 };
 </script>
 <style scoped></style>

@@ -80,16 +80,6 @@ export default {
         name: this.name,
         articles: this.articles,
       };
-      // console.log(this.articles[0].available);
-      // console.log(this.articles[0].currentTarget.dataset.target);
-      // for (const article in auction.articles) {
-      //   article["available"] = false;
-      //   console.log(article.available);
-      //   await axios.put(
-      //     `${process.env.VUE_APP_API_URL}/admin/articles/${article.id}`,
-      //     article
-      //   );
-      // }
       await axios.post(
         `${process.env.VUE_APP_API_URL}/admin/auctions`,
         auction,
@@ -99,18 +89,12 @@ export default {
           },
         }
       );
-      for (let i = 0; i < this.articles.length; i++) {
-        this.articles[i].available = false;
-        await axios.put(
-          `${process.env.VUE_APP_API_URL}/admin/articles/${this.articles[i].id}`,
-          this.articles[i],
-          {
-            headers: {
-              authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-      } //TODO de adaugat asta si in update
+      //TODO de adaugat asta si in update
+      try {
+        await this.$store.dispatch("updateArticleAvailability", this.articles);
+      } catch (error) {
+        this.error = error.message;
+      }
       this.$router.push(`/`);
     },
     reseError() {

@@ -92,8 +92,9 @@ export default {
       period: "",
       condition: "",
       date: "",
-      available: "",
+      available: null,
       year: "",
+      checked: false,
       errors: {
         name: " ",
         description: " ",

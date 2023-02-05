@@ -11,6 +11,7 @@ import AuctionInfo from "../views/Auctions/AuctionInfo.vue";
 import AddAuctionView from "../views/Auctions/AddAuctionDetailsView.vue";
 import AddAuctionArticlesView from "../views/Auctions/AddAuctionArticlesView.vue";
 import EditAuctionArticlesView from "../views/Auctions/EditAuctionArticlesView.vue";
+// import EditAuctionArticlesDetails from "../views/Auctions/EditAuctionArticlesDetails.vue";
 
 const routes = [
   {
