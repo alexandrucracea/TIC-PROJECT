@@ -53,7 +53,6 @@ export default {
 
 <style scoped>
 .nav {
-  height: 8vh;
   background-color: rgba(255, 255, 255, 0);
 }
 
@@ -63,9 +62,27 @@ nav {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
+  background-color: var(--header-background);
+  color: white;
 }
+
 button {
+  background-color: transparent;
+  border: none;
+}
+
+button a {
+  background-color: transparent;
+  text-decoration: none;
+  color: white;
+  /* TODO de pus ce culoare vreau eu aici    */
+}
+
+button a.router-link-active {
   all: unset;
+  background-color: white;
+  padding: 0.5rem;
+  color: var(--header-background);
 }
 </style>
 

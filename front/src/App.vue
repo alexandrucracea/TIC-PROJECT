@@ -26,6 +26,7 @@ export default {};
 * {
   margin: 0;
   --accent-color: #374a67;
+  --header-background: #984931;
   font-family: Bitter;
 }
 body {

@@ -1,72 +1,77 @@
 <template>
+  <the-header></the-header>
+  <img src="../../../pictures/edit-article-background.jpg" class="background" />
   <div class="edit-form">
-    <div>
-      <h2>Edit Article</h2>
-    </div>
-    <div>
-      <form @submit.prevent="submitForm">
+    <div class="page-content">
+      <div class="edit-form">
         <div>
-          <div class="first">
-            <div class="edit-content">
-              <div class="label">Article Name</div>
+          <form @submit.prevent="submitForm">
+            <div class="input-alingmnet">
+              <div class="label title">Edit Article {{ name }}</div>
+            </div>
+            <div class="input-alingmnet">
+              <div class="label">Edit Name</div>
               <input type="text" id="name" v-model.trim="name" />
               <p v-if="errors.name" class="error">{{ errors.name }}</p>
             </div>
-            <div class="edit-content">
-              <div class="label">Description</div>
+            <div class="input-alingmnet">
+              <div class="label">Edit Description</div>
               <input type="text" id="description" v-model.trim="description" />
               <p v-if="errors.description" class="error">
                 {{ errors.description }}
               </p>
             </div>
-            <div class="label">Colors</div>
-            <!-- TODO la culori de sters din backend vectorul si salvat o culoare principala -->
-            <input type="color" id="colors" v-model.trim="colors" />
-            <p v-if="errors.colors" class="error">{{ errors.colors }}</p>
-            <div class="edit-content">
+            <div class="input-alingmnet">
+              <div class="label">Colors</div>
+              <input type="color" id="colors" v-model.trim="colors" />
+              <p v-if="errors.colors" class="error">{{ errors.colors }}</p>
+            </div>
+            <div class="input-alingmnet">
               <div class="label">Price</div>
               <input type="text" id="price" v-model.trim="price" />
               <p v-if="errors.price" class="error">{{ errors.price }}</p>
             </div>
-            <div>
-              <div class="label">Available</div>
-              <input
-                type="checkbox"
-                id="available"
-                name="available"
-                value="available"
-                v-model="available"
-                class="checkbox"
-              />
+            <div class="input-alingmnet">
+              <div>
+                <div class="label">Available</div>
+                <input
+                  type="checkbox"
+                  id="available"
+                  name="available"
+                  value="available"
+                  v-model="available"
+                  class="checkbox"
+                />
+              </div>
             </div>
-          </div>
-          <div class="second">
-            <div class="edit-content">
+            <div class="input-alingmnet">
               <div class="label">Period</div>
               <input type="text" id="period" v-model.trim="period" />
               <p v-if="errors.period" class="error">{{ errors.period }}</p>
             </div>
-            <div class="edit-content">
-              <div class="label">Period</div>
-              <input type="text" id="period" v-model.trim="period" />
-              <p v-if="errors.period" class="error">{{ errors.period }}</p>
-            </div>
-            <div class="edit-content">
+            <div class="input-alingmnet">
               <div class="label">Condition</div>
               <input type="text" id="condition" v-model.trim="condition" />
               <p v-if="errors.condition" class="error">
                 {{ errors.condition }}
               </p>
             </div>
-            <div class="edit-content">
+            <div class="input-alingmnet">
               <div class="label">Date</div>
               <input type="date" id="date" v-model.trim="date" />
               <p v-if="errors.date" class="error">{{ errors.date }}</p>
             </div>
-          </div>
+            <div class="input-alingmnet">
+              <div class="label">Year</div>
+              <input type="text" id="year" v-model.trim="year" />
+              <p v-if="errors.year" class="error">{{ errors.year }}</p>
+            </div>
+            <div>
+              <button type="submit">Save</button>
+            </div>
+          </form>
         </div>
-        <button type="submit" class="button">Save</button>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -210,108 +215,103 @@ export default {
 };
 </script>
 <style scoped>
-.error {
-  color: red;
+.background {
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  /* opacity: 0.8; */
+}
+.title {
+  font-weight: bold;
 }
 .edit-form {
+  /* background-color: rgba(255, 255, 255, 0.579); */
+  width: 40%;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
   flex-direction: column;
-  width: 50%;
-  padding: 40px;
   margin-left: auto;
   margin-right: auto;
-  background: #616283;
-  box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
+  height: 93vh;
 }
-
-.edit-form h2 {
-  margin: 0 0 30px;
-  padding: 0;
-  color: #fff;
-}
-
-.edit-form .edit-content input {
-  padding: 10px 0;
-  font-size: 12px;
-  color: #fff;
-  margin-bottom: 10px;
-  border: none;
-  border-bottom: 1px solid #fff;
-  outline: none;
-  background: transparent;
-}
-
-.edit-content {
+.input-alingmnet {
   display: flex;
-  align-items: flex-start;
+  justify-content: center;
   flex-direction: column;
-  justify-content: left;
+  align-items: flex-start;
+  width: 20vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  /* padding-top: 0.1rem; */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  /* padding: 0.1%; */
 }
-
+form {
+  background-color: rgba(255, 255, 255, 0.737);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: blue; */
+  width: 60vw;
+  padding: 1%;
+  z-index: -1;
+  /* opacity: 0.9; */
+}
+.label {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+}
 input {
   width: 100%;
+  border: none;
+  padding: 0.3rem;
 }
-
-.label {
-  text-align: left;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #fff;
-  pointer-events: none;
-  transition: 0.5s;
-}
-
-.edit-form .edit-content input:focus ~ div,
-.edit-form .edit-content input:valid ~ div {
-  top: -20px;
-  left: 0;
-  color: #03e9f4;
-  font-size: 12px;
-}
-
-.edit-form form a {
+button {
+  padding: 0.8em 1.8em;
+  border: none;
   position: relative;
-  display: inline-block;
-  padding: 10px 20px;
-  color: #03e9f4;
-  font-size: 16px;
-  text-decoration: none;
+  overflow: hidden;
+  text-align: center;
   text-transform: uppercase;
-  overflow: hidden;
-  transition: 0.5s;
-  margin-top: 40px;
-  letter-spacing: 4px;
+  font-size: 16px;
+  transition: 0.3s;
+  z-index: 1;
+  font-family: inherit;
+  /* margin-top: 0.5rem; */
+  font-weight: bold;
+  background-color: transparent;
+  cursor: pointer;
+  color: #9d2601;
 }
-.edit-form a:hover {
-  background: #03e9f4;
-  color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-    0 0 100px #03e9f4;
+button::before {
+  content: "";
+  width: 0;
+  height: 300%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #9d2601;
+  transition: 0.5s ease;
+  display: block;
+  z-index: -1;
 }
-.wrapper {
-  width: 100%;
-  background-color: red;
+
+button:hover::before {
+  width: 105%;
 }
-.first {
-  width: 45%;
-  float: left; /* add this */
-  margin-right: 5%;
-}
-.second {
-  overflow: hidden;
-  margin-left: 1%;
-}
-.button {
-  width: 10%;
-  display: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-.checkbox {
-  margin-right: auto;
-  width: 10%;
+button:hover {
+  color: #e3e3e3;
 }
 </style>

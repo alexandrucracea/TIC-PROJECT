@@ -1,54 +1,71 @@
 <template>
-  <div class="edit-form">
-    <div>
-      <h2>Edit Article</h2>
-    </div>
-    <div>
-      <form @submit.prevent="submitForm">
-        <div class="label">Article Name</div>
-        <input type="text" id="name" v-model.trim="name" />
-        <p v-if="errors.name" class="error">{{ errors.name }}</p>
-        <div class="label">Description</div>
-        <input type="text" id="description" v-model.trim="description" />
-        <p v-if="errors.description" class="error">
-          {{ errors.description }}
-        </p>
-        <div class="label">Colors</div>
-        <input type="color" id="colors" v-model.trim="colors" />
-        <p v-if="errors.colors" class="error">{{ errors.colors }}</p>
-        <div class="label">Price</div>
-        <input type="text" id="price" v-model.trim="price" />
-        <p v-if="errors.price" class="error">{{ errors.price }}</p>
-        <div>
-          <div class="label">Available</div>
-          <input
-            type="checkbox"
-            id="available"
-            name="available"
-            value="available"
-            class="checkbox"
-          />
-        </div>
-        <div class="label">Period</div>
-        <input type="text" id="period" v-model.trim="period" />
-        <p v-if="errors.period" class="error">{{ errors.period }}</p>
-        <div class="label">Condition</div>
-        <input type="text" id="condition" v-model.trim="condition" />
-        <p v-if="errors.condition" class="error">
-          {{ errors.condition }}
-        </p>
-        <div class="edit-content">
-          <div class="label">Date</div>
-          <input type="date" id="date" v-model.trim="date" />
-          <p v-if="errors.date" class="error">{{ errors.date }}</p>
-        </div>
-        <div class="label">Year</div>
-        <input type="text" id="year" v-model.trim="year" />
-        <p v-if="errors.year" class="error">{{ errors.year }}</p>
-        <div>
-          <button type="submit">Save</button>
-        </div>
-      </form>
+  <the-header></the-header>
+  <img src="../../../pictures/add-article-background.jpg" class="background" />
+  <div class="page-content">
+    <div class="edit-form">
+      <div>
+        <form @submit.prevent="submitForm">
+          <div class="input-alingmnet">
+            <div class="label">Article Name</div>
+            <input type="text" id="name" v-model.trim="name" />
+            <p v-if="errors.name" class="error">{{ errors.name }}</p>
+          </div>
+          <div class="input-alingmnet">
+            <div class="label">Description</div>
+            <input type="text" id="description" v-model.trim="description" />
+            <p v-if="errors.description" class="error">
+              {{ errors.description }}
+            </p>
+          </div>
+          <div class="input-alingmnet">
+            <div class="label">Colors</div>
+            <input type="color" id="colors" v-model.trim="colors" />
+            <p v-if="errors.colors" class="error">{{ errors.colors }}</p>
+          </div>
+          <div class="input-alingmnet">
+            <div class="label">Price</div>
+            <input type="text" id="price" v-model.trim="price" />
+            <p v-if="errors.price" class="error">{{ errors.price }}</p>
+          </div>
+          <div class="input-alingmnet">
+            <div>
+              <div class="label">Available</div>
+              <input
+                type="checkbox"
+                id="available"
+                name="available"
+                value="available"
+                class="checkbox"
+              />
+            </div>
+          </div>
+          <div class="input-alingmnet">
+            <div class="label">Period</div>
+            <input type="text" id="period" v-model.trim="period" />
+            <p v-if="errors.period" class="error">{{ errors.period }}</p>
+          </div>
+          <div class="input-alingmnet">
+            <div class="label">Condition</div>
+            <input type="text" id="condition" v-model.trim="condition" />
+            <p v-if="errors.condition" class="error">
+              {{ errors.condition }}
+            </p>
+          </div>
+          <div class="input-alingmnet">
+            <div class="label">Date</div>
+            <input type="date" id="date" v-model.trim="date" />
+            <p v-if="errors.date" class="error">{{ errors.date }}</p>
+          </div>
+          <div class="input-alingmnet">
+            <div class="label">Year</div>
+            <input type="text" id="year" v-model.trim="year" />
+            <p v-if="errors.year" class="error">{{ errors.year }}</p>
+          </div>
+          <div>
+            <button type="submit">Save</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -58,8 +75,8 @@ export default {
   name: "AddArticleView",
   data() {
     return {
-      name: "ceva",
-      description: "ceva",
+      name: "",
+      description: "",
       colors: [],
       price: "",
       period: "",
@@ -154,4 +171,97 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.background {
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+.edit-form {
+  background-color: rgba(255, 255, 255, 0.579);
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  height: 93vh;
+}
+.input-alingmnet {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 20vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  /* padding-top: 0.1rem; */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  /* padding: 0.1%; */
+}
+form {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: blue; */
+  width: 60vw;
+  padding: 1%;
+  z-index: -1;
+}
+.label {
+  font-size: 1.2rem;
+  text-align: center;
+}
+input {
+  width: 100%;
+  border: none;
+  padding: 0.3rem;
+}
+button {
+  padding: 0.8em 1.8em;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  transition: 0.3s;
+  z-index: 1;
+  font-family: inherit;
+  /* margin-top: 0.5rem; */
+  font-weight: bold;
+  background-color: transparent;
+  cursor: pointer;
+  color: #9d2601;
+}
+button::before {
+  content: "";
+  width: 0;
+  height: 300%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #9d2601;
+  transition: 0.5s ease;
+  display: block;
+  z-index: -1;
+}
+
+button:hover::before {
+  width: 105%;
+}
+button:hover {
+  color: #e3e3e3;
+}
+</style>
