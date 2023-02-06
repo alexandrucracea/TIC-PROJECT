@@ -46,4 +46,43 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+/* Ipad */
+@media only screen and (max-width: 1000px) {
+  html {
+    font-size: 50%;
+  }
+  .login-form {
+    width: 50%;
+    /* background-color: red; */
+  }
+  .articles-list {
+    grid-template-columns: 50% 50%;
+  }
+}
+/* mobile */
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+  .login-form {
+    width: 50%;
+    /* background-color: blue; */
+  }
+  .articles-list {
+    grid-template-columns: 100%;
+  }
+}
+/* desktop*/
+@media only screen and (min-width: 1000px) {
+  html {
+    font-size: 80%;
+  }
+  .login-form {
+    width: 50rem;
+    /* background-color: yellow; */
+  }
+  .articles-list {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}
 </style>

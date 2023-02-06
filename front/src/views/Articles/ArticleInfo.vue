@@ -9,7 +9,7 @@
           <p>Period</p>
           <p>Date</p>
           <p>Condition</p>
-          <!-- <p>Colors</p> -->
+          <p>Color</p>
           <p>Description</p>
           <p>Price</p>
           <p>Year</p>
@@ -19,17 +19,16 @@
           <p>{{ period }}</p>
           <p>{{ date }}</p>
           <p>{{ condition }}</p>
-          <!-- <ul>
-            <li v-for="color in colors" :key="color">{{ color }}</li>
-          </ul> -->
-          <p>{{ color }}</p>
+          <p :style="{ backgroundColor: colors }" class="color"></p>
           <p>{{ description }}</p>
           <p>{{ price }}</p>
           <p>{{ year }}</p>
         </div>
       </div>
       <div class="edit-button">
-        <button @click="handleEdit">Edit</button>
+        <button v-if="isAuthenticated && isAdmin" @click="handleEdit">
+          Edit
+        </button>
       </div>
     </div>
   </div>
@@ -79,6 +78,12 @@ export default {
     year() {
       return this.article?.year || "";
     },
+    isAuthenticated() {
+      return this.isLoggenIn || this.$store.getters.token !== null;
+    },
+    isAdmin() {
+      return this.$store.getters.isAdmin;
+    },
   },
   methods: {
     async getArticle() {
@@ -97,6 +102,7 @@ export default {
 h1 {
   text-align: center;
   margin: 1rem;
+  font-size: 5rem;
   font-weight: 400;
 }
 .content-card {
@@ -136,10 +142,18 @@ h1 {
   justify-content: center;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 1.5rem;
+  font-size: 2.7rem;
 }
 p {
-  padding: 1rem;
+  padding: 1.3rem;
+}
+
+.color {
+  width: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100px;
+  padding: 1.3rem;
 }
 .content-values {
   /* background-color: green; */
@@ -149,8 +163,10 @@ p {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  font-size: 1.3rem;
+  align-items: center;
+  font-size: 2.7rem;
 }
+
 button {
   padding: 0.8em 1.8em;
   border: none;
@@ -168,6 +184,7 @@ button {
   cursor: pointer;
   color: #9d2601;
 }
+
 button::before {
   content: "";
   width: 0;

@@ -7,9 +7,31 @@
     class="background"
   />
   <router-link :to="'/add-auction'">
-    <button class="btn-add-auction">Add auctions</button>
+    <button v-if="isAdmin && isAuthenticated" class="btn-add-auction">
+      Add auctions
+    </button>
   </router-link>
-
+  <div class="filter-table">
+    <select
+      name="sort-type"
+      class="sort-type"
+      @click="handleOnSelect"
+      v-model="selectedSortOption"
+    >
+      <option>Ascending by name</option>
+      <option>Descending by name</option>
+    </select>
+    <select
+      name="sort-type"
+      class="sort-type"
+      @click="handleOnSelect"
+      v-model="selectedStatus"
+    >
+      <option value="">All</option>
+      <option value="open">Open</option>
+      <option value="closed">Closed</option>
+    </select>
+  </div>
   <div class="table-container">
     <div class="tbl-header">
       <table cellpadding="0" cellspacing="0" border="0">
@@ -27,7 +49,7 @@
     <div class="tbl-content">
       <table cellpadding="0" cellspacing="0" border="0">
         <tbody v-for="auction in auctions" :key="auction.id">
-          <tr>
+          <tr class="table-inside-rows">
             <td class="auction-link">
               <router-link :to="'/auctions/' + auction.id" class="auction-name">
                 {{ auction.name }}
@@ -54,19 +76,51 @@ export default {
   data() {
     return {
       error: null,
+      selectedSortOption: "", //sort option
+      selectedStatus: "",
     };
   },
   created() {
     this.error = null;
     this.loadAllAuctions();
+    this.selectedSortOption = "";
   },
   computed: {
     auctions() {
       console.log(this.$store.getters.getAuctions);
-      return this.$store.getters.getAuctions;
+      let auctions = [];
+      if (!this.selectedStatus) {
+        auctions = this.$store.getters.getAuctions;
+      } else {
+        auctions = this.$store.getters.getAuctions.filter(
+          (auction) => auction.status === this.selectedStatus
+        );
+      }
+      if (!this.selectedSortOption) {
+        return auctions;
+      } else if (this.selectedSortOption === "Ascending by name") {
+        return auctions.sort((a, b) => {
+          if (a.name < b.name) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      } else {
+        return auctions.sort((a, b) => {
+          if (a.name > b.name) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      }
     },
     isAdmin() {
       return this.$store.getters.isAdmin;
+    },
+    isAuthenticated() {
+      return this.isLoggenIn || this.$store.getters.token !== null;
     },
   },
   methods: {
@@ -80,6 +134,9 @@ export default {
       } catch (error) {
         this.error = error.message;
       }
+    },
+    handleOnSelect() {
+      console.log(this.selectedSortOption);
     },
   },
 };
@@ -112,22 +169,26 @@ export default {
 }
 .table-container {
   display: flex;
+  padding: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 4rem;
 }
+
 table {
   width: 100%;
   table-layout: fixed;
+  backdrop-filter: blur(5px);
 }
 .tbl-header {
   background-color: rgba(255, 255, 255, 0.921);
+  backdrop-filter: blur(5px);
 }
 .tbl-content {
-  height: 30rem;
+  height: 40rem;
   overflow-x: auto;
   margin-top: 0px;
   border: none;
@@ -141,22 +202,29 @@ th {
   text-transform: uppercase;
   font-weight: bold;
   font-size: medium;
-  padding: 0.5rem;
+  padding: 1.5rem;
 }
 .auction-name {
   text-decoration: none;
   color: #2c3e50c1;
 }
 td {
-  padding: 0.5rem;
+  padding: 1.5rem;
   text-align: left;
   vertical-align: middle;
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: 1.5rem;
   color: #2c3e50c1;
   font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.852);
+  background-color: rgba(255, 255, 255, 0.51);
   border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+.table-inside-rows td,
+.auction-name {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 400;
 }
 button {
   padding-left: 0%;
@@ -169,7 +237,7 @@ button {
   overflow: hidden;
   text-align: center;
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 1.7rem;
   transition: 0.3s;
   z-index: 1;
   font-family: inherit;

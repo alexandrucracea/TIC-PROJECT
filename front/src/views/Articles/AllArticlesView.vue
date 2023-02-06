@@ -10,7 +10,9 @@
       />
       <div>
         <router-link :to="'/add-article'">
-          <button class="btn-add-article">Add article</button>
+          <button v-if="isAuthenticated && isAdmin" class="btn-add-article">
+            Add article
+          </button>
         </router-link>
       </div>
       <ul class="articles-list">
@@ -53,6 +55,9 @@ export default {
     },
     isAdmin() {
       return this.$store.getters.isAdmin;
+    },
+    isAuthenticated() {
+      return this.isLoggenIn || this.$store.getters.token !== null;
     },
   },
   methods: {
@@ -100,7 +105,7 @@ export default {
 
 .articles-list {
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  /* grid-template-columns: 25% 25% 25% 25%; */
   list-style: none;
   padding: 0;
 }

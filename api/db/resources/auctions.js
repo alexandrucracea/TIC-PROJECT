@@ -1,5 +1,6 @@
 const { initializeFirestore } = require('../../functions');
 const chance = require('../../lib/chance');
+const statuses = require("../../constants");
 
 module.exports = async () => {
   const db = initializeFirestore();
@@ -23,7 +24,7 @@ module.exports = async () => {
         },
       ],
       description: chance.string(),
-      status: chance.string(),
+      status: chance.pickone(statuses),
     },
     {
       name: chance.string(),
@@ -41,7 +42,7 @@ module.exports = async () => {
         },
       ],
       description: chance.string(),
-      status: chance.string(),
+      status: chance.pickone(statuses),
     },
   ];
 };

@@ -1,13 +1,16 @@
 const { pick } = require('lodash');
 const { error, initializeFirestore } = require('../../functions');
+const statuses = require('../../constants');
 
 module.exports = async (req, res) => {
   const { me } = req.user; //idul userului adminului care face requestul, liniile 4,5,6,7 raman daca e ruta de admin
   if (!me) {
     throw error(404, 'Missing required params');
   }
-
   const { name, startDate, endDate, description, status, articles } = req.body; //destructurare
+  if(!statuses.includes(status)){
+    throw error(400, 'Invalid Status');
+  }
   const db = initializeFirestore();
   const auctionsRef = db.collection('auctions'); //colectiile din firestore sunt mereu la plural -> conventie
   const snapshot = await auctionsRef //verificam daca in colectia noastra mai exista ceva cu aceleasi valori
@@ -42,7 +45,7 @@ module.exports = async (req, res) => {
       endDate: endDate,
       description: description.trim(),
       articles: articles,
-      status: status.trim(),
+      status,
     };
     const response = await auctionsRef.add(payload);
     if (!response.id) {

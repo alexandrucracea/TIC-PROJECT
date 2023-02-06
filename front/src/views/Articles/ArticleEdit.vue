@@ -22,7 +22,7 @@
               </p>
             </div>
             <div class="input-alingmnet">
-              <div class="label">Colors</div>
+              <div class="label">Color</div>
               <input type="color" id="colors" v-model.trim="colors" />
               <p v-if="errors.colors" class="error">{{ errors.colors }}</p>
             </div>
@@ -32,16 +32,16 @@
               <p v-if="errors.price" class="error">{{ errors.price }}</p>
             </div>
             <div class="input-alingmnet">
-              <div>
-                <div class="label">Available</div>
+              <div class="input-container">
                 <input
                   type="checkbox"
                   id="available"
                   name="available"
                   value="available"
                   v-model="available"
-                  class="checkbox"
+                  class="checkbox input"
                 />
+                <div class="label">Available</div>
               </div>
             </div>
             <div class="input-alingmnet">
@@ -129,6 +129,7 @@ export default {
         condition,
         date,
         available,
+        year,
       } = article.data || {};
       this.name = name;
       this.description = description;
@@ -138,6 +139,7 @@ export default {
       this.period = period;
       this.date = date;
       this.available = available;
+      this.year = year;
       //TODO de adaugat si pentru drop downul de culori
     },
     async submitForm() {
@@ -155,6 +157,7 @@ export default {
         condition: this.condition,
         date: this.date,
         available: this.available,
+        year: this.year,
       };
       await axios.put(
         `${process.env.VUE_APP_API_URL}/admin/articles/${this.id}`,
@@ -254,8 +257,56 @@ export default {
   margin-bottom: 0.5rem;
   /* padding: 0.1%; */
 }
+
+.input-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.input {
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 9px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  margin-right: 1rem;
+}
+
+.input:active,
+.input:checked:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.input:checked {
+  background-color: #e9ecee;
+  border: 1px solid #adb8c0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
+    inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+  color: #99a1a7;
+}
+
+.input:checked:after {
+  content: "\2714";
+  font-size: 14px;
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  color: #9d2601;
+}
+
 form {
-  background-color: rgba(255, 255, 255, 0.737);
+  background-color: rgba(255, 255, 255, 0.514);
+  backdrop-filter: blur(5px);
   height: 100%;
   display: flex;
   justify-content: center;
@@ -313,5 +364,8 @@ button:hover::before {
 }
 button:hover {
   color: #e3e3e3;
+}
+.error {
+  color: red;
 }
 </style>

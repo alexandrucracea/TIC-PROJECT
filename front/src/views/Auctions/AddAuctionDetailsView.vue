@@ -18,11 +18,15 @@
       <p v-if="errors.description" class="error">
         {{ errors.description }}
       </p>
-      <div class="label">Status</div>
-      <input type="text" id="status" v-model.trim="status" />
+      <p>Status</p>
+      <select name="select-status" v-model="status">
+        <option value="open">Open</option>
+        <option value="closed">Closed</option>
+      </select>
       <p v-if="errors.status" class="error">
         {{ errors.status }}
       </p>
+      <br />
       <div class="label">Name</div>
       <input type="text" id="name" v-model.trim="name" />
       <p v-if="errors.name" class="error">
@@ -50,7 +54,7 @@ export default {
       startDate: "",
       endDate: "",
       description: "",
-      status: "",
+      status: [],
       articles: [],
       name: "",
       errors: {

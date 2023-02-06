@@ -85,7 +85,7 @@ export default {
             idToken,
             localId,
           });
-          this.$router.replace("/");
+          this.$router.replace("/auctions");
         } else {
           this.error.login = "Token is not valid";
         }
@@ -171,7 +171,7 @@ h1 {
 }
 .login-form {
   background: #eaeaea95;
-  width: 40%;
+  /* width: 40%; */
   display: flex;
   align-items: center;
   justify-content: center;
