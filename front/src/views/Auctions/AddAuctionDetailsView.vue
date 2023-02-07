@@ -1,41 +1,48 @@
 <template>
-  <div>
+  <div class="main-form">
     <h1>Add auction</h1>
-    <ul>
-      <li v-for="article in this.loadedArticles" :key="article.id">
-        {{ article.name }}
-      </li>
-    </ul>
-    <form @submit.prevent="submitForm">
-      <div class="label">Start Date</div>
-      <input type="date" id="start-date" v-model="startDate" />
-      <p v-if="errors.date" class="error">{{ errors.startDate }}</p>
-      <div class="label">End Date</div>
-      <input type="date" id="end-date" v-model="endDate" />
-      <p v-if="errors.date" class="error">{{ errors.endDate }}</p>
-      <div class="label">Description</div>
-      <input type="text" id="description" v-model.trim="description" />
-      <p v-if="errors.description" class="error">
-        {{ errors.description }}
-      </p>
-      <p>Status</p>
-      <select name="select-status" v-model="status">
-        <option value="open">Open</option>
-        <option value="closed">Closed</option>
-      </select>
-      <p v-if="errors.status" class="error">
-        {{ errors.status }}
-      </p>
-      <br />
-      <div class="label">Name</div>
-      <input type="text" id="name" v-model.trim="name" />
-      <p v-if="errors.name" class="error">
-        {{ errors.description }}
-      </p>
-      <div>
-        <button type="submit">Save</button>
+    <h2>Articles:</h2>
+    <div
+      v-for="article in this.loadedArticles"
+      :key="article.id"
+      class="article"
+    >
+      {{ article.name }}
+    </div>
+    <div class="page-content">
+      <div class="edit-form">
+        <form @submit.prevent="submitForm">
+          <div class="label">Start Date</div>
+          <input type="date" id="start-date" v-model="startDate" />
+          <p v-if="errors.date" class="error">{{ errors.startDate }}</p>
+          <div class="label">End Date</div>
+          <input type="date" id="end-date" v-model="endDate" />
+          <p v-if="errors.date" class="error">{{ errors.endDate }}</p>
+          <div class="label">Description</div>
+          <input type="text" id="description" v-model.trim="description" />
+          <p v-if="errors.description" class="error">
+            {{ errors.description }}
+          </p>
+          <p>Status</p>
+          <select name="select-status" v-model="status">
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+          </select>
+          <p v-if="errors.status" class="error">
+            {{ errors.status }}
+          </p>
+          <br />
+          <div class="label">Name</div>
+          <input type="text" id="name" v-model.trim="name" />
+          <p v-if="errors.name" class="error">
+            {{ errors.description }}
+          </p>
+          <div>
+            <button type="submit" class="btn-save">Save</button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 <script>
@@ -99,7 +106,7 @@ export default {
       } catch (error) {
         this.error = error.message;
       }
-      this.$router.push(`/`);
+      this.$router.push(`/auctions`);
     },
     reseError() {
       this.errors = {
@@ -138,5 +145,63 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+h2 {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+}
+
+.article {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.8rem;
+  border-top: 1px solid rgba(55, 53, 53, 0.579);
+  border-bottom: 1px solid rgba(55, 53, 53, 0.579);
+}
+.edit-form {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.label {
+  padding: 0.5rem;
+}
+
+.btn-save::before {
+  content: "";
+  width: 0;
+  height: 300%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #9d2601;
+  transition: 0.5s ease;
+  display: block;
+  z-index: -1;
+}
+/* 
+.btn-save:hover::before {
+  width: 150%;
+}
+
+input {
+  padding: 0.1rem 0.5rem;
+  width: 100%;
+  border: none;
+}
+
+.btn-save:hover {
+  color: white;
+} */
+</style>
 //TODO de terminat partea asta

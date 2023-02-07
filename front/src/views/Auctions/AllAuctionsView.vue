@@ -18,6 +18,7 @@
       @click="handleOnSelect"
       v-model="selectedSortOption"
     >
+      <option value="" disabled selected hidden>Sort by name</option>
       <option>Ascending by name</option>
       <option>Descending by name</option>
     </select>
@@ -27,6 +28,7 @@
       @click="handleOnSelect"
       v-model="selectedStatus"
     >
+      <option value="" disabled selected hidden>Filter by status</option>
       <option value="">All</option>
       <option value="open">Open</option>
       <option value="closed">Closed</option>
@@ -151,6 +153,26 @@ export default {
   height: 100vh;
   object-fit: cover;
 }
+.filter-table {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: right;
+  padding: 1rem;
+  margin-right: 2rem;
+  margin-top: 5rem;
+  /* width: 100%; */
+}
+.sort-type {
+  border: none;
+  padding: 0.5rem;
+  margin: 0.2rem;
+  background-color: rgba(255, 255, 255, 0.674);
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  /* width: 15rem; */
+}
 .btn-add-auction {
   padding: 0.8em 1.8em;
   border: none;
@@ -175,7 +197,8 @@ export default {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 4rem;
+  height: 30rem;
+  /* margin-top: 0.5rem; */
 }
 
 table {
@@ -225,6 +248,7 @@ td {
   font-size: 1.5rem;
   color: white;
   font-weight: 400;
+  word-wrap: break-word;
 }
 button {
   padding-left: 0%;

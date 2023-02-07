@@ -27,7 +27,11 @@
             </router-link>
           </div>
           <div v-if="isAdmin">
-            <button @click="handleDelete(article.id)" class="btn-delete">
+            <button
+              v-if="isAdmin && isAuthenticated"
+              @click="handleDelete(article.id)"
+              class="btn-delete"
+            >
               Delete
             </button>
           </div>

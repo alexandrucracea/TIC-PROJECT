@@ -11,7 +11,7 @@
     <div v-if="this.isEditingAuctionArticles">
       <div class="choose-articles-container">
         <h1>Choose articles</h1>
-        <div>
+        <div v-if="!this.anyRemainingArticles">
           <div
             v-for="article in articles"
             :key="article.id"
@@ -36,27 +36,31 @@
             </button>
           </div>
         </div>
+        <div>This auction does not have any articles</div>
       </div>
     </div>
 
     <div v-if="this.isAddingAuctionArticles">
-      <h1>Choose articles</h1>
-      <div>
-        <div v-for="article in availableArticles" :key="article.id">
-          <input
-            type="checkbox"
-            name="auction-item"
-            v-model="this.selectedNewArticles"
-            :value="article"
-            class="input"
-          />
-          <label for="aution-item">
-            {{ article.name }}
-          </label>
+      <div class="choose-articles-container">
+        <h1>Choose articles</h1>
+        <div v-if="anyArticlesAvailable">
+          <div v-for="article in availableArticles" :key="article.id">
+            <input
+              type="checkbox"
+              name="auction-item"
+              v-model="this.selectedNewArticles"
+              :value="article"
+              class="input"
+            />
+            <label for="aution-item">
+              {{ article.name }}
+            </label>
+          </div>
+          <div>
+            <button @click="saveAddedAuctionArticles">Save</button>
+          </div>
         </div>
-        <div>
-          <button @click="saveAddedAuctionArticles">Save</button>
-        </div>
+        <div v-else>There are no available articles</div>
       </div>
     </div>
     <div v-if="this.isEditingAuctionDetails">
@@ -91,6 +95,8 @@ export default {
       selectedArticles: [],
       selectedNewArticles: [],
       isEditingAuctionDetails: false,
+      anyArticlesAvailable: false,
+      anyRemainingArticles: false,
     };
   },
   created() {
@@ -130,12 +136,23 @@ export default {
     },
     handleEditAuctionArticles() {
       this.loadedArticles = this.articles;
+      if (this.loadedArticles.length > 0) {
+        this.anyRemainingArticles = true;
+      } else {
+        this.anyRemainingArticles = false;
+      }
       this.isEditingAuctionArticles = true;
       this.isAddingAuctionArticles = false;
       this.isEditingAuctionDetails = false;
     },
     handleEditAddAuctionArticles() {
       this.loadedArticles = this.articles;
+      // console.log(this.loadedArticles.length);
+      if (this.loadedArticles.length > 0) {
+        this.anyArticlesAvailable = true;
+      } else {
+        this.anyArticlesAvailable = false;
+      }
       this.isAddingAuctionArticles = true;
       this.isEditingAuctionArticles = false;
       this.isEditingAuctionDetails = false;
@@ -160,7 +177,7 @@ export default {
           },
         }
       );
-      this.$router.push(`/`);
+      this.$router.push(`/auctions`);
     },
     async saveAddedAuctionArticles() {
       const auction = this.auction;
@@ -184,7 +201,7 @@ export default {
         this.error = error.message;
       }
       // TODO -> cand adaugam articole sa setam available pe false si daca le scoatem din licitatie sa fie pe true
-      this.$router.push(`/`);
+      this.$router.push(`/auctions`);
     },
   },
   components: { EditAuctionDetailsView },

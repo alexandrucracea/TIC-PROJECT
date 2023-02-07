@@ -1,9 +1,9 @@
 <template>
   <div class="nav">
     <nav>
-      <button>
+      <!-- <button>
         <router-link to="/">Home</router-link>
-      </button>
+      </button> -->
       <!-- <button>
         <router-link to="/about">About</router-link>
       </button> -->
@@ -14,9 +14,9 @@
         <router-link to="/articles">All articles</router-link>
       </button>
       <logout-button v-if="isAuthenticated" @logout="logout"></logout-button>
-      <!-- <button v-else>
+      <button v-else>
         <router-link to="/login">Login</router-link>
-      </button> -->
+      </button>
     </nav>
   </div>
 </template>
@@ -45,7 +45,7 @@ export default {
     logout() {
       this.isLoggenIn = false;
       this.$store.dispatch("logout");
-      this.$router.replace("/login");
+      this.$router.replace("/auctions");
     },
   },
 };
@@ -64,6 +64,7 @@ nav {
   padding: 1rem;
   background-color: var(--header-background);
   color: white;
+  height: 2.5rem;
 }
 
 button {
@@ -75,7 +76,9 @@ button a {
   background-color: transparent;
   text-decoration: none;
   color: white;
-  /* TODO de pus ce culoare vreau eu aici    */
+  width: 5rem;
+  padding: 0.5rem;
+  /* background-color: red; */
 }
 
 button a.router-link-active {

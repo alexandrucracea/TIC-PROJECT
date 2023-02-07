@@ -58,6 +58,9 @@ nav a.router-link-exact-active {
   .articles-list {
     grid-template-columns: 50% 50%;
   }
+  .sort-type {
+    width: 15rem;
+  }
 }
 /* mobile */
 @media only screen and (max-width: 600px) {
@@ -66,10 +69,15 @@ nav a.router-link-exact-active {
   }
   .login-form {
     width: 50%;
+    height: 3rem;
     /* background-color: blue; */
   }
   .articles-list {
     grid-template-columns: 100%;
+  }
+  .sort-type {
+    width: 15rem;
+    height: 3rem;
   }
 }
 /* desktop*/
@@ -83,6 +91,10 @@ nav a.router-link-exact-active {
   }
   .articles-list {
     grid-template-columns: 25% 25% 25% 25%;
+  }
+  .sort-type {
+    width: 15rem;
+    height: 3rem;
   }
 }
 </style>

@@ -126,7 +126,7 @@ export default {
       // } catch (error) {
       //   this.error = error.message;
       // }
-      this.$router.push(`/`);
+      this.$router.push(`/auctions`);
     },
     reseError() {
       this.errors = {
