@@ -13,7 +13,11 @@
       <button>
         <router-link to="/articles">All articles</router-link>
       </button>
-      <logout-button v-if="isAuthenticated" @logout="logout"></logout-button>
+      <logout-button
+        v-if="isAuthenticated"
+        @logout="logout"
+        :isLoggenIn="isLoggenIn"
+      ></logout-button>
       <button v-else>
         <router-link to="/login">Login</router-link>
       </button>

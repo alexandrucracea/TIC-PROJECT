@@ -5,6 +5,12 @@
 <script>
 export default {
   name: "LogoutButton",
+  props: {
+    isLoggenIn: {
+      type: Boolean,
+      required: true,
+    },
+  },
   emits: ["logout"], //ii spune componentei ca primeste o functie de la parinte pe care poate sa o execute
   methods: {
     logout() {

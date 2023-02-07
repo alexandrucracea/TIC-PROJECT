@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+// import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import ArticleInfo from "../views/Articles/ArticleInfo.vue";
 import ArticleEdit from "../views/Articles/ArticleEdit.vue";
@@ -16,8 +16,9 @@ import EditAuctionArticlesView from "../views/Auctions/EditAuctionArticlesView.v
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    redirect: "/auctions",
+    // name: "home",
+    // component: HomeView,
   },
   // ARTICLES
   {
